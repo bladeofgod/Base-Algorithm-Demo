@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    final int[] testData = {22,52,32,12,34,87,98,31,66,5};
+
     
     private TextView tvResult;
 
@@ -130,10 +136,51 @@ public class MainActivity extends AppCompatActivity {
 
     //选择
     private void choiceAlgorithm() {
+        int[] temp = testData.clone();
+        int len = temp.length;
+
+        for(int i=0 ; i< len-1;i++){
+            int flag = i;
+            for(int j = i+1;j<len;j++){
+                if(temp[j] < temp[flag]){
+                    flag = j;
+                }
+            }
+            int tt = temp[i];
+            temp[i] = temp[flag];
+            temp[flag] = tt;
+        }
+        showResult("选择",temp);
     }
 
     //冒泡
     private void bubbleAlgorithm() {
+        int[] temp = testData.clone();
+        int len = temp.length;
+        for(int i=0 ; i< len-1;i++){
+            //循环一遍，尾部数据有序  : -i
+            for(int j = 0; j < len - 1 -i; j++){
+                if(temp[j] > temp[j+1]){
+                    int t = temp[j+1];
+                    temp[j+1] = temp[j];
+                    temp[j] = t;
+                }
+            }
+        }
+        showResult("冒泡",temp);
+    }
+
+    private void showResult(String title,int[] result){
+        tvResult.setText(title + "  " + transfer(result));
+    }
+
+    private String transfer(int[] o){
+        StringBuffer sb = new StringBuffer();
+        for (int str : o){
+            sb.append(str);
+            sb.append(",");
+        }
+        return sb.toString();
     }
 
 

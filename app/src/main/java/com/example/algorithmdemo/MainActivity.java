@@ -132,6 +132,22 @@ public class MainActivity extends AppCompatActivity {
 
     //插入
     private void insertAlgorithm() {
+        int[] temp = testData.clone();
+        int len = temp.length;
+        int preIndex,current;
+
+        for(int i=1;i<len;i++){
+            preIndex = i-1;
+            current = temp[i];
+            //后者大于前者后者向后移
+            //向前遍历
+            while (preIndex >= 0 && temp[preIndex] > current){
+                temp[preIndex+1] = temp[preIndex];
+                preIndex--;
+            }
+            temp[preIndex+1] = current;
+        }
+        showResult("插入",temp);
     }
 
     //选择

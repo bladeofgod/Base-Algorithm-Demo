@@ -127,6 +127,21 @@ public class MainActivity extends AppCompatActivity {
 
     //希尔
     private void shellAlgorithm() {
+        int[] temp = testData.clone();
+        int len = temp.length;
+        for(int gap = (int)Math.floor(len /2);gap > 0;gap = (int)Math.floor(gap / 2)){
+            for(int i = gap ; i < len ; i++){
+                int j = i;
+                int current = temp[i];
+                while (j - gap >=0 && current <temp[j-gap]){
+                    temp[j] = temp[j - gap];
+                    j = j-gap;
+                }
+                temp[j] = current;
+            }
+
+        }
+        showResult("希尔",temp);
 
     }
 

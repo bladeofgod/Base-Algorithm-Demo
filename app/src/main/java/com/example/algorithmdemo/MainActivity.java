@@ -117,7 +117,38 @@ public class MainActivity extends AppCompatActivity {
 
     //快速
     private void quickAlgorithm() {
+        int[] temp = testData.clone();
+        int len = temp.length;
 
+        quick(temp,0,len-1);
+        showResult("快排",temp);
+
+    }
+    private void quick(int[] a , int left,int right){
+        if(left >= right) return;
+        int key = a[left];
+        int i = left;
+        int j = right;
+
+        while (i<j){
+            //j 向左移动，如果直到小于key
+            while (a[j] >= key && i<j){
+                j--;
+            }
+            //i向右移动，找到大于key
+            while (a[i] <= key && i < j){
+                i++;
+            }
+            if(i<j){
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+        a[left] = a[i];
+        a[i] = key;
+        quick(a,left,i-1);
+        quick(a,i+1,right);
     }
 
     //归并

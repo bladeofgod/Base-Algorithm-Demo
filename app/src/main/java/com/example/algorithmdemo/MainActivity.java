@@ -122,7 +122,38 @@ public class MainActivity extends AppCompatActivity {
 
     //归并
     private void mergeAlgorithm() {
+        int[] temp = testData.clone();
+        int len = temp.length;
+        mergeSort(temp,0,temp.length-1);
+        showResult("归并",temp);
 
+    }
+
+    private void mergeSort(int[] t,int start,int end){
+        if(start  < end){
+            int mid = (start + end)/2;
+            mergeSort(t,start,mid);
+            mergeSort(t,mid+1,end);
+            merge(t,start,mid,end);
+        }
+    }
+
+    private void merge(int[] a,int left,int mid, int right){
+        int[] temp = new int[a.length];
+        int p1 = left,p2 = mid +1 ,k = left;
+
+        while (p1 <= mid && p2 <= right){
+            if(a[p1] <= a[p2]){
+                temp[k++] = a[p1++];
+            }else{
+                temp[k++] = a[p2++];
+            }
+        }
+        while (p1<=mid) temp[k++] = a[p1++];
+        while (p2<= right) temp[k++] = a[p2++];
+        for(int i = left; i <=right; i ++){
+            a[i] = temp[i];
+        }
     }
 
     //希尔
